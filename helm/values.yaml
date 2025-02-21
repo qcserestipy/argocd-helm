@@ -90,10 +90,6 @@ server:
     requests:
       cpu: 500m
       memory: 128Mi
-  # service:
-    # type: NodePort
-    # nodePortHttp: 80
-    # nodePortHttps: 443
   ingress:
     enabled: true
     annotations:
@@ -106,23 +102,6 @@ server:
           - path: /
             pathType: Prefix
     https: false
- 
-  # ingress:
-  #   enabled: true
-  #   annotations:
-  #     nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
-  #     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
-  #   ingressClassName: 'nginx'
-  #   hosts:
-  #     - argocd.local.com
-  #   paths:
-  #     - /
-  #   pathType: Prefix
-  #   tls:
-  #     - secretName: gitops-tls
-  #       hosts:
-  #         - argocd.local.com
-  #   https: false
 
 # -- Repo Server
 repoServer:
