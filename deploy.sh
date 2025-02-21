@@ -7,6 +7,6 @@ helm install argo-cd argo/argo-cd  \
   --set notifications.enabled=false \
   --set configs.rbac.create=false  \
   --debug 
-kubectl apply -f kustomize/tls/repo-secret.yaml
+#kubectl apply -f kustomize/tls/repo-secret.yaml
 sleep 60 
 helm template root-app/ | kubectl apply -f -

@@ -14,10 +14,10 @@ spec:
       helm:
         valueFiles:
           - $values/helm/values.yaml
-    - repoURL: 'ssh://git@github.com/qcserestipy/argocd-helm.git'
+    - repoURL: 'https://github.com/qcserestipy/argocd-helm.git'
       targetRevision: HEAD
       ref: values
-    - repoURL: 'ssh://git@github.com/qcserestipy/argocd-helm.git'
+    - repoURL: 'https://github.com/qcserestipy/argocd-helm.git'
       targetRevision: HEAD
       path: kustomize
   destination:
