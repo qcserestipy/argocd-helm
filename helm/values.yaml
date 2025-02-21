@@ -92,8 +92,8 @@ server:
       memory: 128Mi
   service:
     type: NodePort
-    port: 80
-    targetPort: 8080
+    nodePortHttp: 80
+    nodePortHttps: 443
   ingress:
     enabled: false
     annotations:
