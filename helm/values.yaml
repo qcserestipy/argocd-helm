@@ -91,21 +91,22 @@ server:
       cpu: 500m
       memory: 128Mi
   service:
-    type: NodePort
-    nodePortHttp: 80
-    nodePortHttps: 443
+    # type: NodePort
+    # nodePortHttp: 80
+    # nodePortHttps: 443
   ingress:
-    enabled: false
+    enabled: true
     annotations:
-      nginx.ingress.kubernetes.io/ssl-passthrough: 'false'
-      nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
-    ingressClassName: 'nginx'
+      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    ingressClassName: "nginx"
     hosts:
-      - local.argocd.com
-    paths:
-      - /
-    pathType: Prefix
+      - host: local.argocd.com
+        paths:
+          - path: /
+            pathType: Prefix
     https: false
+ 
   # ingress:
   #   enabled: true
   #   annotations:
