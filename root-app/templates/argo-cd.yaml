@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-cd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: 'https://argoproj.github.io/argo-helm'
+      chart: argo-cd
+      targetRevision: 7.8.4
+      helm:
+        valueFiles:
+          - $values/helm/values.yaml
+    - repoURL: 'ssh://git@github.com/qcserestipy/argocd-helm.git'
+      targetRevision: HEAD
+      ref: values
+    - repoURL: 'ssh://git@github.com/qcserestipy/argocd-helm.git'
+      targetRevision: HEAD
+      path: kustomize
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

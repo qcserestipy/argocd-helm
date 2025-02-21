@@ -1,0 +1,210 @@
+# -- Used when you manage applications in the same cluster where Argo CD runs
+createClusterRoles: true
+
+# -- Custom resource configuration
+crds:
+  install: true
+  keep: true
+
+global:
+  domain: local.argocd.com
+
+# -- Argo Configs
+configs:
+  secret:
+    createSecret: false
+  cm:
+    # -- Create the argocd-cm configmap for [declarative setup]
+    create: true
+  params:
+    # -- Create the argocd-cmd-params-cm configmap
+    create: true
+  rbac:
+    create: false
+
+# -- Application controller
+controller:
+  serviceAccount:
+    create: true
+  replicas: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# -- Dex
+dex:
+  enabled: false
+
+# -- Redis
+redis:
+  enabled: true
+  name: redis
+  serviceAccount:
+    create: true
+    name: argocd-redis
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+# -- Server
+server:
+  name: server
+  insecure: true
+  replicas: 1
+  serviceAccount:
+    create: true
+    name: argocd-server
+  extraArgs:
+    - --insecure
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+    behavior:
+      scaleDown:
+        stabilizationWindowSeconds: 120
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+      scaleUp:
+        stabilizationWindowSeconds: 120
+        policies:
+          - type: Pods
+            value: 5
+            periodSeconds: 60
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 256Mi
+    requests:
+      cpu: 500m
+      memory: 128Mi
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-passthrough: 'false'
+      nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    ingressClassName: 'nginx'
+    hosts:
+      - local.argocd.com
+    paths:
+      - /
+    pathType: Prefix
+    https: false
+  # ingress:
+  #   enabled: true
+  #   annotations:
+  #     nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
+  #     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+  #   ingressClassName: 'nginx'
+  #   hosts:
+  #     - argocd.local.com
+  #   paths:
+  #     - /
+  #   pathType: Prefix
+  #   tls:
+  #     - secretName: gitops-tls
+  #       hosts:
+  #         - argocd.local.com
+  #   https: false
+
+# -- Repo Server
+repoServer:
+  name: repo-server
+  serviceAccount:
+    create: true
+    name: 'argocd-repo-server'
+  replicas: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+    behavior:
+      scaleDown:
+        stabilizationWindowSeconds: 120
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 120
+      scaleUp:
+        stabilizationWindowSeconds: 120
+        policies:
+          - type: Pods
+            value: 5
+            periodSeconds: 60
+  resources:
+    limits:
+      cpu: 250m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  # TLS certificate configuration via Secret
+  ## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/tls/#configuring-tls-to-argocd-repo-server
+  ## Note: Issuing certificates via cert-manager in not supported right now because it's not possible to restart repo server automatically without extra controllers.
+  certificateSecret:
+    # -- Create argocd-repo-server-tls secret
+    enabled: false
+    # -- Annotations to be added to argocd-repo-server-tls secret
+    annotations: {}
+    # -- Labels to be added to argocd-repo-server-tls secret
+    labels: {}
+    # -- Certificate authority. Required for self-signed certificates.
+    ca: ''
+    # -- Certificate private key
+    key: ''
+    # -- Certificate data. Must contain SANs of Repo service (ie: argocd-repo-server, argocd-repo-server.argo-cd.svc)
+    crt: ''
+  rbac: []
+  #   - apiGroups:
+  #     - argoproj.io
+  #     resources:
+  #     - applications
+  #     verbs:
+  #     - get
+  #     - list
+  #     - watch
+
+# -- ApplicationSet controller
+applicationSet:
+  enabled: true
+  name: applicationset-controller
+  replicaCount: 1
+  serviceAccount:
+    create: true
+    name: argocd-applicationset-controller
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# -- Notifications controller
+notifications:
+  enabled: false
+  name: notifications-controller
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  serviceAccount:
+    create: true
+    name: argocd-notifications-controller
