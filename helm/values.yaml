@@ -90,8 +90,12 @@ server:
     requests:
       cpu: 500m
       memory: 128Mi
+  service:
+    type: NodePort
+    port: 80
+    targetPort: 8080
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       nginx.ingress.kubernetes.io/ssl-passthrough: 'false'
       nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
