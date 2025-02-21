@@ -90,7 +90,7 @@ server:
     requests:
       cpu: 500m
       memory: 128Mi
-  service:
+  # service:
     # type: NodePort
     # nodePortHttp: 80
     # nodePortHttps: 443
