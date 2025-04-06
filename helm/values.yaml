@@ -16,6 +16,7 @@ configs:
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
+    application.resourceTrackingMethod: annotation
   params:
     # -- Create the argocd-cmd-params-cm configmap
     create: true
