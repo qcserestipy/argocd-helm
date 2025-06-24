@@ -18,13 +18,13 @@ configs:
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
-    extension.config: |-
+    application.resourceTrackingMethod: annotation
+    extension.config: |
       extensions:
         - name: metrics
           backend:
             services:
-              - url: argocd-metrics-server.argocd.svc.cluster.local
-    application.resourceTrackingMethod: annotation
+              - url: "http://argocd-metrics-server.argocd.svc.cluster.local:8080"
     resource.customizations: |
       "*.upbound.io/*":
         health.lua: |
