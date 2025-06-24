@@ -19,7 +19,7 @@ configs:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
     application.resourceTrackingMethod: annotation
-    extension.config: |-
+    extension.config: |
       extensions:
         - name: metrics
           backend:
