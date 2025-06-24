@@ -1,0 +1,39 @@
+# mini-prom-values.yaml
+server:
+  # Tight resource envelope (tweak up if you have many pods)
+  resources:
+    requests: {cpu: 50m,  memory: 256Mi}
+    limits:   {cpu: 250m, memory: 512Mi}
+
+  # Keep just a week of data, hard-capped at 1 GB
+  retention: "7d"                # default is 15 d
+  retentionSize: "1GB"           # needs Prometheus ≥2.7
+
+  # Ephemeral storage is fine on a lab box; use a tiny PVC if you reboot often
+  persistentVolume:
+    enabled: false               # uses emptyDir
+    # enabled: true
+    # size: 5Gi
+
+  # Expose the HTTP API inside the cluster
+  service:
+    type: ClusterIP
+    port: 9090
+
+alertmanager: {enabled: false}
+pushgateway:  {enabled: false}
+kube-state-metrics: {enabled: false}
+nodeExporter:       {enabled: false}
+
+# Scrape only what ArgoCD-metrics needs (pods that opt-in with annotations)
+serverFiles:
+  prometheus.yml:
+    scrape_configs:
+      - job_name: kubernetes-pods-annotated
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: "true"
+
