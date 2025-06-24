@@ -13,6 +13,8 @@ global:
 configs:
   secret:
     createSecret: false
+  params:
+    create: false
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
