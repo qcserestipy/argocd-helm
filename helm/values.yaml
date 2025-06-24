@@ -14,7 +14,7 @@ configs:
   secret:
     createSecret: false
   params:
-    server.enable.proxy.extension: true
+    create: false
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
