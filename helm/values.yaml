@@ -16,6 +16,12 @@ configs:
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
+    extension.config: |-
+      extensions:
+        - name: metrics
+          backend:
+            services:
+              - url: argocd-metrics-server.argocd.svc.cluster.local
     application.resourceTrackingMethod: annotation
     resource.customizations: |
       "*.upbound.io/*":
