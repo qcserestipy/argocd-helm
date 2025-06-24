@@ -24,7 +24,7 @@ configs:
         - name: metrics
           backend:
             services:
-              - url: "http://argocd-metrics-server.argocd.svc.cluster.local:8080"
+              - url: "http://argocd-metrics-server.argocd.svc.cluster.local:9003"
     resource.customizations: |
       "*.upbound.io/*":
         health.lua: |
