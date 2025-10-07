@@ -2,7 +2,7 @@ set -euo pipefail
 BASE="apps/service-accounts"
 mkdir -p "$BASE"
 
-for i in $(seq -w 001 1000); do
+for i in $(seq -w 001 100); do
   DIR="$BASE/app-$i"
   mkdir -p "$DIR"
 
@@ -26,5 +26,5 @@ EOF
 done
 
 git add apps/service-accounts
-git commit -m "Add 1000 stress ServiceAccount apps"
+git commit -m "Add 100 stress ServiceAccount apps"
 git push
