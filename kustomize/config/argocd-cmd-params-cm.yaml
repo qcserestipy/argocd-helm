@@ -10,11 +10,13 @@ data:
   controller.ignore.normalizer.jq.timeout: 1s
   controller.log.format: text
   controller.log.level: info
-  controller.operation.processors: "10"
-  controller.repo.server.timeout.seconds: "60"
+  controller.operation.processors: "300"
+  controller.repo.server.timeout.seconds: "180"
   controller.self.heal.timeout.seconds: "5"
-  controller.status.processors: "20"
+  controller.status.processors: "600"
   controller.sync.timeout.seconds: "0"
+  controller.kubectl.parallelism.limit: "100"
+  controller.sharding.algorithm: "round-robin"
   dexserver.log.format: text
   dexserver.log.level: info
   hydrator.enabled: "false"
@@ -25,7 +27,7 @@ data:
   repo.server: argo-cd-argocd-repo-server:8081
   reposerver.log.format: text
   reposerver.log.level: info
-  reposerver.parallelism.limit: "0"
+  reposerver.parallelism.limit: "100"
   server.basehref: /
   server.disable.auth: "false"
   server.enable.gzip: "true"
@@ -34,6 +36,7 @@ data:
   server.log.format: text
   server.log.level: info
   server.repo.server.strict.tls: "false"
+  server.repo.server.timeout.seconds: "180"
   server.rootpath: ""
   server.staticassets: /shared/app
   server.x.frame.options: sameorigin
