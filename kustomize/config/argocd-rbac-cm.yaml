@@ -9,3 +9,4 @@ metadata:
 data:
   policy.csv: |-
     p, role:readonly, extensions, invoke, metrics, allow
+    g, patrick, role:admin
