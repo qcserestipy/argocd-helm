@@ -18,6 +18,8 @@ configs:
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
+    timeout.reconciliation: "6m"
+    timeout.hard.reconciliation: "0s"
     application.resourceTrackingMethod: annotation
     extension.config: |
       extensions:
