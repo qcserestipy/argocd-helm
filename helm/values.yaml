@@ -7,7 +7,7 @@ crds:
   keep: true
 
 global:
-  domain: local.argocd.com
+  domain: argocd.yukaringermany.com
 
 # -- Argo Configs
 configs:
@@ -246,15 +246,20 @@ server:
   ingress:
     enabled: true
     annotations:
-      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+#      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     ingressClassName: "nginx"
-    hosts:
-      - host: local.argocd.com
-        paths:
-          - path: /
-            pathType: Prefix
-    https: false
+    extraTls:
+      - hosts:
+        - argocd.yukaringermany.com
+        secretName: argocd-ingress-tls
+#    hosts:
+#      - host: argocd.yukaringermany.com
+#        paths:
+#          - path: /
+#            pathType: Prefix
+    https: true
   extensions:
     enabled: true
     extensionList:
