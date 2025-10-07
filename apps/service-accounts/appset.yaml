@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sa-stress-100
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/qcserestipy/argocd-helm.git
+      revision: HEAD
+      directories:
+      - path: apps/service-accounts/*
+  template:
+    metadata:
+      name: sa-stress-{{path.basename}}
+      labels:
+        purpose: stress
+        component: service-account
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/qcserestipy/argocd-helm.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        directory:
+          recurse: false
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: sa-stress
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+
