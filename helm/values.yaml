@@ -185,7 +185,7 @@ controller:
   resources:
     limits:
       cpu: 1000m
-      memory: 4096Mi
+      memory: 1024Mi
     requests:
       cpu: 250m
       memory: 256Mi
@@ -220,7 +220,7 @@ server:
   extraArgs:
     - --insecure
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 5
     targetCPUUtilizationPercentage: 50
@@ -263,7 +263,7 @@ server:
 #            pathType: Prefix
     https: true
   extensions:
-    enabled: true
+    enabled: false
     extensionList:
     - name: extension-metrics
       env:
@@ -287,7 +287,7 @@ repoServer:
   - name: ARGOCD_HELM_ALLOW_CONCURRENCY
     value: "true"
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 5
     targetCPUUtilizationPercentage: 50
@@ -340,7 +340,7 @@ repoServer:
 
 # -- ApplicationSet controller
 applicationSet:
-  enabled: true
+  enabled: false
   name: applicationset-controller
   replicaCount: 1
   serviceAccount:
