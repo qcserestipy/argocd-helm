@@ -3,8 +3,8 @@ createClusterRoles: true
 
 # -- Custom resource configuration
 crds:
-  install: true
-  keep: true
+  install: false
+  keep: false
 
 global:
   domain: argocd.yukaringermany.com
