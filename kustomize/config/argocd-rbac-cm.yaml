@@ -12,4 +12,4 @@ data:
   policy.csv: |-
     p, role:readonly, extensions, invoke, metrics, allow
     g, patrick, role:admin
-    g, dex:patrickeschenbach96@gmail.com, role:admin
+    g, qcserestipy, role:admin
