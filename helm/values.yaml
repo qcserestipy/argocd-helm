@@ -22,6 +22,8 @@ configs:
     timeout.hard.reconciliation: "0s"
     accounts.patrick: apiKey, login
     admin.enabled: "false"
+    server.dex.server: https://argo-cd-argocd-dex-server:5556
+    #server.dex.server.strict.tls: "false"
     dex.config: |
       connectors:
       - type: github
