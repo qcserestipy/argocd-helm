@@ -15,12 +15,12 @@ configs:
     createSecret: false
   params:
     create: false
+#   accounts.patrick: apiKey, login
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
     timeout.reconciliation: "6m"
     timeout.hard.reconciliation: "0s"
-    accounts.patrick: apiKey, login
     admin.enabled: "false"
     dex.config: |
       connectors:
