@@ -7,9 +7,9 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
 data:
-  scopes: '[read:user, user:email, read:org]'
-  policy.default: role:no-access
   policy.csv: |-
     p, role:readonly, extensions, invoke, metrics, allow
     g, patrick, role:admin
     g, qcserestipy, role:admin
+  policy.default: role:no-access
+  scopes: '[preferred_username]'
