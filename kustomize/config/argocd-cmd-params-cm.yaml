@@ -19,6 +19,7 @@ data:
   controller.sharding.algorithm: "round-robin"
   dexserver.log.format: text
   dexserver.log.level: info
+  server.dex.server: https://argo-cd-argocd-dex-server.argocd.svc.cluster.local:5556
   hydrator.enabled: "false"
   notificationscontroller.log.format: text
   notificationscontroller.log.level: info
