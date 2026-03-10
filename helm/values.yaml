@@ -20,8 +20,7 @@ configs:
     create: true
     timeout.reconciliation: "6m"
     timeout.hard.reconciliation: "0s"
-    accounts.patrick: apiKey, login
-    accounts.patrick.enabled: "false"
+#    accounts.patrick: apiKey, login
     admin.enabled: "false"
     dex.config: |
       connectors:
