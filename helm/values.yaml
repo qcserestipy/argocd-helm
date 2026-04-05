@@ -184,6 +184,8 @@ configs:
 
 # -- Application controller
 controller:
+  metrics:
+    enabled: true
   serviceAccount:
     create: true
   replicas: 1
@@ -203,6 +205,8 @@ controller:
 # -- Dex
 dex:
   enabled: true
+  metrics:
+    enabled: true
   resources:
     limits:
       cpu: 100m
@@ -214,6 +218,8 @@ dex:
 # -- Redis
 redis:
   enabled: true
+  metrics:
+    enabled: true
   name: redis
   serviceAccount:
     create: true
@@ -229,6 +235,8 @@ redis:
 # -- Server
 server:
   name: server
+  metrics:
+    enabled: true
   insecure: true
   replicas: 1
   serviceAccount:
@@ -292,6 +300,8 @@ server:
 # -- Repo Server
 repoServer:
   name: repo-server
+  metrics:
+    enabled: true
   serviceAccount:
     create: true
     name: 'argocd-repo-server'
@@ -385,3 +395,5 @@ notifications:
   serviceAccount:
     create: true
     name: argocd-notifications-controller
+  metrics:
+    enabled: true
