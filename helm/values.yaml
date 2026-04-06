@@ -270,23 +270,17 @@ server:
     requests:
       cpu: 500m
       memory: 128Mi
+
   ingress:
     enabled: true
     annotations:
-      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-      #nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    ingressClassName: "nginx"
+    ingressClassName: "traefik"
     extraTls:
       - hosts:
         - argocd.yukaringermany.com
         secretName: argocd-ingress-tls
-#    hosts:
-#      - host: argocd.yukaringermany.com
-#        paths:
-#          - path: /
-#            pathType: Prefix
-    https: true
+    https: false
+
   extensions:
     enabled: false
     extensionList:
