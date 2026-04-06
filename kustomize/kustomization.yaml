@@ -5,3 +5,4 @@ resources:
   - config/argocd-rbac-cm.yaml
   - config/argocd-cmd-params-cm.yaml
   - tls/certs.yaml
+  - ing/ingress.yaml

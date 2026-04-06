@@ -272,14 +272,14 @@ server:
       memory: 128Mi
 
   ingress:
-    enabled: true
-    annotations:
-    ingressClassName: "traefik"
-    extraTls:
-      - hosts:
-        - argocd.yukaringermany.com
-        secretName: argocd-ingress-tls
-    tls: false
+    enabled: false
+    # annotations:
+    # ingressClassName: "traefik"
+    # extraTls:
+    #   - hosts:
+    #     - argocd.yukaringermany.com
+    #     secretName: argocd-ingress-tls
+    # tls: false
   extensions:
     enabled: false
     extensionList:
