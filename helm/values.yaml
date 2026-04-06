@@ -279,8 +279,7 @@ server:
       - hosts:
         - argocd.yukaringermany.com
         secretName: argocd-ingress-tls
-    https: false
-
+    tls: false
   extensions:
     enabled: false
     extensionList:
