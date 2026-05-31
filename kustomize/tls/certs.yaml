@@ -4,6 +4,6 @@ data:
   tls.key: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUozUVFBemlrRzRKcWthaVh3dkJKdlU1U2NKRHdMc3B1OFFpZ2pzYUNEelJvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFeVBob05EMW9QWkszQ3pyYWRtMjBoOWZxejRocnZZd1FSN1NpYm9zYmp5Q1MvRFhabnhncApjbStwcmhzaGp0R3FWQ0JyWnhFeHNEUWlXci9rT3M0NExnPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=
 kind: Secret
 metadata:
-  name: argocd-tls
+  name: argocd-ingress-tls
   namespace: argocd
 type: kubernetes.io/tls
